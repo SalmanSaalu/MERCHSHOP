@@ -21,6 +21,9 @@ from merchboxapp.models import additems, catelog, merchshop, subcatelog
 from shopcart.models import cartitems, buy
 
 
+
+
+
 def first(request):
     # addedprod = additems.objects.filter(user_id=request.user.id)
     addedprod = additems.objects.all()
@@ -128,6 +131,14 @@ def first(request):
     #     print(i.title)
 
     # print(ar)
+    addedprod=additems.objects.all()
+    for i in addedprod:  
+        i.expdate=timezone.now()+datetime.timedelta(days=10)
+        i.flag=1
+        i.save()
+        ww=merchshop.objects.get(shopname=i.title)
+        ww.productavailability=1
+        ww.save()
     return  render(request,'index.html',{'addprod':addprod,'d':d,'e':e,'w':w})
 
 @login_required(login_url='loginned')

@@ -21,4 +21,5 @@ urlpatterns=[
 # path('subcategcreation/<int:id>/<str:name>/',views.subcategcreation,name='subcategcreation'),
 
     path('profile2', views.profile2, name='profile2'),
+
 ]

@@ -26,7 +26,7 @@ from django.apps import apps
 # from merchboxapp.forms import carForm
 
 
-from django.utils.encoding import force_bytes,force_text,DjangoUnicodeDecodeError
+from django.utils.encoding import force_bytes,force_str,DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 
@@ -99,7 +99,7 @@ class verificationView(View):
     def get(self,request,uidb64,token):
         print('good')
         try:
-            id=force_text(urlsafe_base64_decode(uidb64))
+            id=force_str(urlsafe_base64_decode(uidb64))
             user=User.objects.get(pk=id)
 
             if user.is_active:
